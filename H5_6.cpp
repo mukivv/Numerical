@@ -9,22 +9,22 @@ int main(){
     float l[3][3] = {} , lt[3][3] = {};
     float x[3] , y[3];
     //L,Lt matrix
-    for (int i=0;i<3;i++){
-    	for (int j=0;j<=i;j++){
+    for (int r=0;r<3;r++){
+    	for (int e=0;e<=r;e++){
     		float sum = 0.0;
-    		if (i==j){
-    			for (int k=0;k<j;k++){
-    				sum += l[i][k]*l[i][k];
+    		if (e==r){
+    			for (int R=0;R<e;R++){
+    				sum += l[r][R]*l[r][R];
 				}
-				l[i][i] = sqrt(a[i][i] - sum);
+				l[r][r] = sqrt(a[r][r] - sum);
 			} else {
-				for (int k=0;k<j;k++){
-    				sum += l[i][k] * l[j][k];
+				for (int R=0;R<e;R++){
+    				sum += l[r][R] * l[e][R];
 				}
-				l[i][j] = (a[i][j] - sum) / l[j][j];
+				l[r][e] = (a[r][e] - sum) / l[e][e];
 			}
 			
-			lt[j][i] = l[i][j];
+			lt[e][r] = l[r][e];
 		}
 	}
 

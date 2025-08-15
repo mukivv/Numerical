@@ -7,27 +7,28 @@ int main(){
     float a[3][3] = {{-2,3,1},{3,4,-5},{1,-2,1}};
     float l[3][3] = {} , u[3][3] = {};
     float x[3] , y[3];
-    for (int j=0;j<3;j++){
-    	u[j][j] = 1;
+    for (int r=0;r<3;r++){
     	// L Matrix
-    	for (int i=j;i<3;i++){
-    		l[i][j] = a[i][j];
-			for (int k=0;k<j;k++){
-				l[i][j] -= l[i][k]*u[k][j];
+    	for (int e=r;e<3;e++){
+    		l[e][r] = a[e][r];
+			for (int R=0;R<r;R++){
+				l[e][r] -= l[e][R]*u[R][r];
 			}
 		}
 		
+		u[r][r] = 1;
+		
 		//U Matrix
-		for (int i=j+1;i<3;i++){
-			u[j][i] = a[j][i];
-			for (int k=0;k<j;k++){
-				u[j][i] -= l[j][k]*u[k][i];
+		for (int e=r+1;e<3;e++){
+			u[r][e] = a[r][e];
+			for (int R=0;R<r;R++){
+				u[r][e] -= l[r][R]*u[R][e];
 			}
-			u[j][i] /= l[j][j];
+			u[r][e] /= l[r][r];
 		}
 	}
 	//forward
-	 for (int i = 0;i<3;i++) {
+	for (int i=0;i<3;i++) {
         y[i] = b[i];
         for (int j=0;j<i;j++) {
             y[i] -= l[i][j] * y[j];
@@ -35,27 +36,14 @@ int main(){
         y[i] /= l[i][i];
     }
     //backward
-    for (int i=2;i>= 0;i--) {
+    for (int i=2;i>=0;i--) {
         x[i] = y[i];
         for (int j=i+1;j<3;j++) {
             x[i] -= u[i][j] * x[j];
         }
+        x[i] /= u[i][i];
     }
     
-    ////////////////////////////////////print
-	for (int i=0;i<3;i++){
-    	for (int j=0;j<3;j++){
-			cout<<l[i][j]<<" ";
-		}
-		cout<<endl;
-	}
-	cout<<endl;
-	for (int i=0;i<3;i++){
-    	for (int j=0;j<3;j++){
-			cout<<u[i][j]<<" ";
-		}
-		cout<<endl;
-	}
 	for (int i=0;i<3;i++){
     	cout<<x[i]<<" ";
 	}
