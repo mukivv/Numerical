@@ -8,7 +8,7 @@ int main(){
     float a[3][3] = {{4, 2, 1}, {2, 3, 0.5}, {1, 0.5, 2}};
     float l[3][3] = {} , lt[3][3] = {};
     float x[3] , y[3];
-    //L matrix
+    //L,Lt matrix
     for (int i=0;i<3;i++){
     	for (int j=0;j<=i;j++){
     		float sum = 0.0;
@@ -23,14 +23,11 @@ int main(){
 				}
 				l[i][j] = (a[i][j] - sum) / l[j][j];
 			}
+			
+			lt[j][i] = l[i][j];
 		}
 	}
-	//Lt matrix
-	for (int i=0;i<3;i++){
-    	for (int j=0;j<3;j++){
-    		lt[i][j] = l[j][i];
-    	}
-	}
+
     //forward
     for (int i=0;i<3;i++) {
         y[i] = b[i];
@@ -47,11 +44,9 @@ int main(){
         }
         x[i] /= lt[i][i];
     }
+    //print
 	for (int i=0;i<3;i++){
     	cout<<x[i]<<" ";
 	}
 	cout<<endl;
-    
-	
-	
 }
