@@ -3,10 +3,11 @@
 
 int main(){
 	int n,x;
-	double xL =0 ,xR =1000000 ,xM ,xMOld =0 ,fxR ,fxM ,error;
+	double xL =0 ,xR =1000000 ,xM ,xMOld,fxR ,fxM ,error,i=-1;
 	scanf("%d %d",&x,&n);
 	if (2<=n && n<= x && x <= 2000000){
 		do {
+			i++;
 			xM = (xL + xR) / 2;
 			fxR = pow(xR,n) - x;
 			fxM = pow(xM,n) - x;
@@ -15,12 +16,12 @@ int main(){
 			} else {
 				xR = xM;
 			}
-			error = fabs( (xM - xMOld) / xM);
+			if (i>0){
+				error = fabs( (xM - xMOld) / xM);
+			}
 			xMOld = xM;
-			printf("%.7f %.11f\n",xM,error);
-		} while (error > 0.000001);
+		} while (i==0 || error > 0.000001);
 		
 		printf("%.4f",xM);
 	}
 }
-
