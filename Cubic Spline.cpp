@@ -41,20 +41,6 @@ int main() {
     
     //forward
     for (int r=0;r<N;r++){ 
-        int maxRow = r;
-        double maxVal = fabs(a[r][r]);
-        for (int i = r+1; i < N; i++){
-            if (fabs(a[i][r]) > fabs(a[maxRow][r])) maxRow = i;
-        }
-        //swap
-        if (maxRow != r){
-            for (int j = 0; j < N+1; j++){
-                double temp = a[r][j];
-                a[r][j] = a[maxRow][j];
-                a[maxRow][j] = temp;
-            }
-        }
-        
         for (int e=r+1;e<N;e++){ //row e = edit
             if (a[e][r] == 0) continue;
             double er = a[e][r];
